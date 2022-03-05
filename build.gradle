@@ -293,6 +293,12 @@ dependencies {
     liquibaseRuntime "com.h2database:h2"
     developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    implementation group: "com.ingenico.connect.gateway", name: "connect-sdk-java", version:"6.27.0"
+    implementation("org.springframework.boot:spring-boot-starter-activemq:${springBootVersion}")
+    implementation('org.apache.activemq:activemq-broker:5.16.3')
+    implementation("org.drools:drools-core:7.64.0.Final")
+    implementation("org.drools:drools-compiler:7.64.0.Final")
+    implementation("org.drools:drools-mvel:7.64.0.Final")
 }
 
 if (project.hasProperty("gae")) {

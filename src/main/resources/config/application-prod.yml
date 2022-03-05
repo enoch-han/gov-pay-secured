@@ -47,6 +47,11 @@ spring:
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
+  mail:
+    host: localhost
+    port: 25
+    username:
+    password:
   thymeleaf:
     cache: true
   sleuth:
@@ -58,6 +63,12 @@ spring:
     locator:
       discovery:
         enabled: true
+  activemq:
+    broker-url: tcp://localhost:61616
+    username: admin
+    password: admin
+    packages:
+      trust-all: true
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:

@@ -55,6 +55,12 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
+    drop-first: true
+  mail:
+    host: localhost
+    port: 25
+    username:
+    password:
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
@@ -68,6 +74,12 @@ spring:
     locator:
       discovery:
         enabled: true
+  activemq:
+    broker-url: tcp://localhost:61616
+    username: admin
+    password: admin
+    packages:
+      trust-all: true
 
 server:
   port: 8080

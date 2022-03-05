@@ -15,7 +15,11 @@ export class HomeComponent implements OnInit {
   constructor(private accountService: AccountService, private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.accountService.identity().subscribe(account => (this.account = account));
+    this.accountService.identity().subscribe(account => {
+      this.account = account;
+      // eslint-disable-next-line no-console
+      console.log(account);
+    });
   }
 
   login(): void {

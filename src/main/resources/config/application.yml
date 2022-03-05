@@ -136,6 +136,12 @@ spring:
             client-id: web_app
             client-secret: web_app
             scope: openid,profile,email
+  activemq:
+    broker-url: tcp://localhost:61616
+    username: admin
+    password: admin
+    packages:
+      trust-all: true
 
 server:
   servlet:
@@ -194,4 +200,10 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  worldline:
+    apiKeyId: '534823c062bedc24'
+    secretApiKey: '5frGHofPzr97BppEPZNVeZiPdZlblt1VmAb1bhImsvY='
+    merchantId: '1070'
+    merchantName: 'Merchant 1070'
+    returnURL: 'http://localhost:9000/payment-review'
