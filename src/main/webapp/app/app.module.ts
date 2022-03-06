@@ -24,6 +24,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { PaymentModule } from './payment/payment.module';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     SharedModule,
     HomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
+    PaymentModule,
     EntityRoutingModule,
     AppRoutingModule,
     // Set this to true to enable service worker (PWA)

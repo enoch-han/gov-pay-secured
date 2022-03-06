@@ -22,7 +22,19 @@ public class ActiveMQConfiguration {
     public ConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
         activeMQConnectionFactory.setBrokerURL(brokerUrl);
-        activeMQConnectionFactory.setTrustedPackages(Arrays.asList("com.company.govpaysecured.domain"));
+        activeMQConnectionFactory.setTrustedPackages(
+            Arrays.asList(
+                "com.company.govpaysecured.domain",
+                "java.lang",
+                "javax.security",
+                "java.util",
+                "java.io",
+                "java.time",
+                "org.apache.activemq",
+                "org.fusesource.hawtbuf",
+                "com.thoughtworks.xstream.mapper"
+            )
+        );
         return activeMQConnectionFactory;
     }
 

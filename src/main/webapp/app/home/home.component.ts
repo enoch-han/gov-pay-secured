@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => {
       this.account = account;
-      // eslint-disable-next-line no-console
-      console.log(account);
     });
   }
 

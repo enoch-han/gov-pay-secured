@@ -73,25 +73,4 @@ public class Message implements Serializable {
     public void setCheckURL(String checkURL) {
         this.checkURL = checkURL;
     }
-
-    @Override
-    public String toString() {
-        return (
-            "Message [message=" +
-            customMessage +
-            ", payload=" +
-            payload +
-            ", source=" +
-            source +
-            ", check=" +
-            check +
-            ", checkURL=" +
-            checkURL +
-            ", nextQueue=" +
-            nextQueue +
-            ", completionPercentage=" +
-            completionPercentage +
-            "]"
-        );
-    }
 }

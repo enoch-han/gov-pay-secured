@@ -13,11 +13,14 @@ import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.GetHostedChec
 import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.definitions.HostedCheckoutSpecificInput;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.Customer;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.Order;
+import java.io.IOError;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,12 +32,13 @@ public class WorldLinePaymentService {
 
     private final ApplicationProperties applicationProperties;
 
-    private final URL worldlineProperties = getClass().getResource("classpath:WorldLinePayment.properties");
+    private final URL worldlineProperties;
 
     private Client client;
 
-    public WorldLinePaymentService(ApplicationProperties applicationProperties) {
+    public WorldLinePaymentService(ApplicationProperties applicationProperties) throws IOException {
         this.applicationProperties = applicationProperties;
+        worldlineProperties = new ClassPathResource("WorldLinePayment.properties").getURL();
     }
 
     private Client getClient() throws URISyntaxException {
