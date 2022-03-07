@@ -2,7 +2,7 @@ package com.company.govpaysecured.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "worldline", ignoreUnknownFields = false)
+@ConfigurationProperties(prefix = "application.worldline", ignoreUnknownFields = false)
 public class Worldline {
 
     private String apiKeyId = "";
