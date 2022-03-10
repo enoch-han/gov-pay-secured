@@ -33,7 +33,7 @@ export class DataUtils {
     const byteCharacters = Buffer.from(data, 'base64');
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.at(i);
+      byteNumbers[i] = byteCharacters[i];
     }
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], {

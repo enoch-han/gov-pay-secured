@@ -1,0 +1,6 @@
+projectKey=govpaysecured
+serverUrl=http://localhost:9001
+serverVersion=8.9.2.46101
+dashboardUrl=http://localhost:9001/dashboard?id=govpaysecured
+ceTaskId=AX91Etj9-BpllPCek1VX
+ceTaskUrl=http://localhost:9001/api/ce/task?id=AX91Etj9-BpllPCek1VX
