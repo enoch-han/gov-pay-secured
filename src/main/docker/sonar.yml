@@ -3,6 +3,8 @@ version: '3.8'
 services:
   govpaysecured-sonar:
     image: sonarqube:8.9.2-community
+    container_name: sonar
+    # command: -Dsonar.ce.javaOpts=-Xmx256m
     # Authentication is turned off for out of the box experience while trying out SonarQube
     # For real use cases delete sonar.forceAuthentication variable or set sonar.forceAuthentication=true
     environment:
@@ -11,3 +13,9 @@ services:
     # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:9001:9000
+    deploy:
+      resources:
+        limits:
+          memory: 800M
+        reservations:
+          memory: 100M

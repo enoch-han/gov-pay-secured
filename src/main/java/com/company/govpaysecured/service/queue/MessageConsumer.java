@@ -128,7 +128,7 @@ public class MessageConsumer {
     private Mock requestValidationInput(String url) {
         // requests an outer api for an input validation input
 
-        RestTemplate restTemplate = new RestTemplate();
+        var restTemplate = new RestTemplate();
         return restTemplate.getForObject(url, Mock.class);
     }
 

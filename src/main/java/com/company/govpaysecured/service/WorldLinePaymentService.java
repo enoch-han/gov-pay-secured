@@ -51,7 +51,7 @@ public class WorldLinePaymentService {
     }
 
     public CreateHostedCheckoutResponse initiatePayment(Payment value) {
-        CreateHostedCheckoutRequest body = new CreateHostedCheckoutRequest();
+        var body = new CreateHostedCheckoutRequest();
         try {
             client = getClient();
             var hostedCheckoutSpecificInput = new HostedCheckoutSpecificInput();

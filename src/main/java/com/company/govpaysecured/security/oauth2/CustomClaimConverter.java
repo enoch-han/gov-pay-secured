@@ -53,7 +53,7 @@ public class CustomClaimConverter implements Converter<Map<String, Object>, Map<
     public Map<String, Object> convert(Map<String, Object> claims) {
         Map<String, Object> convertedClaims = this.delegate.convert(claims);
         @CheckForNull
-        RequestAttributes reqAttrib = RequestContextHolder.getRequestAttributes();
+        var reqAttrib = RequestContextHolder.getRequestAttributes();
         if (reqAttrib != null) {
             // Retrieve and set the token
             String token = bearerTokenResolver.resolve(((ServletRequestAttributes) reqAttrib).getRequest());

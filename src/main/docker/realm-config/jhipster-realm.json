@@ -1,6 +1,6 @@
 {
-  "id": "jhipster",
-  "realm": "jhipster",
+  "id": "govpaysecured",
+  "realm": "govpaysecured",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,

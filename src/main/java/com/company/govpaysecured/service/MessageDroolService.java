@@ -27,7 +27,7 @@ public class MessageDroolService {
     }
 
     public KieSession createSession() {
-        KieSession ksession = container.newKieSession();
+        var ksession = container.newKieSession();
         ksession.setGlobal("nameCheckURL", NAME_CHECK_URL);
         ksession.setGlobal("expiryDateCheckURL", EXPIRY_DATE_CHECK_URL);
         ksession.setGlobal("phoneCheckURL", PHONE_CHECK_URL);
@@ -42,7 +42,7 @@ public class MessageDroolService {
         if (message == null) {
             return;
         }
-        FactHandle factHandle = session.getFactHandle(message);
+        var factHandle = session.getFactHandle(message);
         if (factHandle == null) {
             session.insert(message);
             session.fireAllRules();

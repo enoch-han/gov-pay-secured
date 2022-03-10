@@ -210,12 +210,7 @@ public class UserService {
         } else if (details.get("locale") != null) {
             // trim off country code if it exists
             String locale = (String) details.get("locale");
-            if (locale.contains("_")) {
-                locale = locale.substring(0, locale.indexOf('_'));
-            } else if (locale.contains("-")) {
-                locale = locale.substring(0, locale.indexOf('-'));
-            }
-            user.setLangKey(locale.toLowerCase());
+            user.setLangKey(trimLocale(locale).toLowerCase());
         } else {
             // set langKey to default if not specified by IdP
             user.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -231,6 +226,16 @@ public class UserService {
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
+        }
+    }
+
+    private static String trimLocale(String locale) {
+        if (locale.contains("_")) {
+            return locale.substring(0, locale.indexOf('_'));
+        } else if (locale.contains("-")) {
+            return locale.substring(0, locale.indexOf('-'));
+        } else {
+            return locale;
         }
     }
 }

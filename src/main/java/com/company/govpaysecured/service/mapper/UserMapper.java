@@ -44,7 +44,7 @@ public class UserMapper {
         if (userDTO == null) {
             return null;
         } else {
-            User user = new User();
+            var user = new User();
             user.setId(userDTO.getId());
             user.setLogin(userDTO.getLogin());
             user.setFirstName(userDTO.getFirstName());
@@ -67,7 +67,7 @@ public class UserMapper {
                 authoritiesAsString
                     .stream()
                     .map(string -> {
-                        Authority auth = new Authority();
+                        var auth = new Authority();
                         auth.setName(string);
                         return auth;
                     })
@@ -81,7 +81,7 @@ public class UserMapper {
         if (id == null) {
             return null;
         }
-        User user = new User();
+        var user = new User();
         user.setId(id);
         return user;
     }
@@ -93,7 +93,7 @@ public class UserMapper {
         if (user == null) {
             return null;
         }
-        UserDTO userDto = new UserDTO();
+        var userDto = new UserDTO();
         userDto.setId(user.getId());
         return userDto;
     }
@@ -122,7 +122,7 @@ public class UserMapper {
         if (user == null) {
             return null;
         }
-        UserDTO userDto = new UserDTO();
+        var userDto = new UserDTO();
         userDto.setId(user.getId());
         userDto.setLogin(user.getLogin());
         return userDto;

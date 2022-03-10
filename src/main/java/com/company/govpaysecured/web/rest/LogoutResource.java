@@ -31,8 +31,11 @@ public class LogoutResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and a body with a global logout URL.
      */
     @PostMapping("/api/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request, @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
-        StringBuilder logoutUrl = new StringBuilder();
+    public ResponseEntity<Map<String, String>> logout(
+        HttpServletRequest request,
+        @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken
+    ) {
+        var logoutUrl = new StringBuilder();
 
         String issuerUri = this.registration.getProviderDetails().getIssuerUri();
         if (issuerUri.contains("auth0.com")) {

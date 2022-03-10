@@ -61,7 +61,7 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
         if (entity == null) {
             return null;
         }
-        Problem problem = entity.getBody();
+        var problem = entity.getBody();
         if (!(problem instanceof ConstraintViolationProblem || problem instanceof DefaultProblem)) {
             return entity;
         }
@@ -91,7 +91,7 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
 
     @Override
     public ResponseEntity<Problem> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, @Nonnull NativeWebRequest request) {
-        BindingResult result = ex.getBindingResult();
+        var result = ex.getBindingResult();
         List<FieldErrorVM> fieldErrors = result
             .getFieldErrors()
             .stream()

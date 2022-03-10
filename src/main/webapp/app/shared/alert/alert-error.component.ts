@@ -37,24 +37,7 @@ export class AlertErrorComponent implements OnDestroy {
               errorHeader = httpErrorResponse.headers.get(entry);
             }
           }
-          if (errorHeader) {
-            this.addErrorAlert(errorHeader);
-          } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.fieldErrors) {
-            const fieldErrors = httpErrorResponse.error.fieldErrors;
-            for (const fieldError of fieldErrors) {
-              if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
-                fieldError.message = 'Size';
-              }
-              // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
-              const convertedField: string = fieldError.field.replace(/\[\d*\]/g, '[]');
-              const fieldName: string = convertedField.charAt(0).toUpperCase() + convertedField.slice(1);
-              this.addErrorAlert(`Error on field "${fieldName}"`);
-            }
-          } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
-            this.addErrorAlert(httpErrorResponse.error.detail ?? httpErrorResponse.error.message);
-          } else {
-            this.addErrorAlert(httpErrorResponse.error);
-          }
+          this.assessHeaderAndRespond(errorHeader, httpErrorResponse);
           break;
         }
 
@@ -91,5 +74,26 @@ export class AlertErrorComponent implements OnDestroy {
 
   private addErrorAlert(message?: string): void {
     this.alertService.addAlert({ type: 'danger', message }, this.alerts);
+  }
+
+  private assessHeaderAndRespond(errorHeader: string | null, httpErrorResponse: HttpErrorResponse): void {
+    if (errorHeader) {
+      this.addErrorAlert(errorHeader);
+    } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.fieldErrors) {
+      const fieldErrors = httpErrorResponse.error.fieldErrors;
+      for (const fieldError of fieldErrors) {
+        if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
+          fieldError.message = 'Size';
+        }
+        // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
+        const convertedField: string = fieldError.field.replace(/\[\d*\]/g, '[]');
+        const fieldName: string = convertedField.charAt(0).toUpperCase() + convertedField.slice(1);
+        this.addErrorAlert(`Error on field "${fieldName}"`);
+      }
+    } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
+      this.addErrorAlert(httpErrorResponse.error.detail ?? httpErrorResponse.error.message);
+    } else {
+      this.addErrorAlert(httpErrorResponse.error);
+    }
   }
 }

@@ -44,7 +44,7 @@ public class PublicUserResource {
         log.debug("REST request to get all public User names");
 
         final Page<UserDTO> page = userService.getAllPublicUsers(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        var headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
