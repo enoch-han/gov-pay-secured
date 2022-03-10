@@ -149,8 +149,18 @@ public class Payment implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Payment)) {
+            return false;
+        }
+        return id != null && id.equals(((Payment) o).getId());
     }
 
     @Override

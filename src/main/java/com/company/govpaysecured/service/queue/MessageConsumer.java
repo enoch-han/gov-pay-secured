@@ -140,36 +140,27 @@ public class MessageConsumer {
                 try {
                     data = requestValidationInput(message.getCheckURL());
                     valueRecieved = true;
-                    if (data != null && !data.getText().isEmpty()) {
-                        return !message.getPayload().getName().equalsIgnoreCase(data.getText());
-                    }
-                    return false;
+                    return checkName(data, message);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.error("MessageConsumer_Validate_CaseName: {}", e.getMessage());
                     return false;
                 }
             case EXPIRYDATE:
                 try {
                     data = requestValidationInput(message.getCheckURL());
                     valueRecieved = true;
-                    if (data != null && !data.getText().isEmpty()) {
-                        return !message.getPayload().getExpiryDate().equalsIgnoreCase(data.getText());
-                    }
-                    return false;
+                    return checkExpiryDate(data, message);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.error("MessageConsumer_Validate_CaseExpiryDate: {}", e.getMessage());
                     return false;
                 }
             case PHONE:
                 try {
                     data = requestValidationInput(message.getCheckURL());
                     valueRecieved = true;
-                    if (data != null && !data.getText().isEmpty()) {
-                        return !message.getPayload().getPhoneNumber().equalsIgnoreCase(data.getText());
-                    }
-                    return false;
+                    return checkPhone(data, message);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.error("MessageConsumer_Validate_Phone: {}", e.getMessage());
                     return false;
                 }
             case NONE:
@@ -180,5 +171,26 @@ public class MessageConsumer {
             default:
                 return false;
         }
+    }
+
+    private boolean checkName(Mock data, Message message) {
+        if (data != null && !data.getText().isEmpty()) {
+            return !message.getPayload().getName().equalsIgnoreCase(data.getText());
+        }
+        return false;
+    }
+
+    private boolean checkExpiryDate(Mock data, Message message) {
+        if (data != null && !data.getText().isEmpty()) {
+            return !message.getPayload().getExpiryDate().equalsIgnoreCase(data.getText());
+        }
+        return false;
+    }
+
+    private boolean checkPhone(Mock data, Message message) {
+        if (data != null && !data.getText().isEmpty()) {
+            return !message.getPayload().getPhoneNumber().equalsIgnoreCase(data.getText());
+        }
+        return false;
     }
 }

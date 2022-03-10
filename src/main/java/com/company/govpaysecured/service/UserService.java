@@ -111,7 +111,7 @@ public class UserService {
         for (String authority : userAuthorities) {
             if (!dbAuthorities.contains(authority)) {
                 log.debug("Saving authority '{}' in local database", authority);
-                Authority authorityToSave = new Authority();
+                var authorityToSave = new Authority();
                 authorityToSave.setName(authority);
                 authorityRepository.save(authorityToSave);
             }
@@ -157,14 +157,14 @@ public class UserService {
         } else {
             throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT!");
         }
-        User user = getUser(attributes);
+        var user = getUser(attributes);
         user.setAuthorities(
             authToken
                 .getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .map(authority -> {
-                    Authority auth = new Authority();
+                    var auth = new Authority();
                     auth.setName(authority);
                     return auth;
                 })
@@ -175,7 +175,7 @@ public class UserService {
     }
 
     private static User getUser(Map<String, Object> details) {
-        User user = new User();
+        var user = new User();
         Boolean activated = Boolean.TRUE;
         // handle resource server JWT, where sub claim is email and uid is ID
         if (details.get("uid") != null) {

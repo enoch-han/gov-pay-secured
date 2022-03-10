@@ -1,10 +1,8 @@
 import { Payment } from '../payment.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { LoginService } from 'app/login/login.service';
 import { PaymentService } from '../payment.service';
 import { Wpayment } from '../wpayment.model';
 
@@ -18,13 +16,7 @@ export class PaymentConfirmationComponent implements OnInit {
   amount!: number | undefined;
   wPayment!: Wpayment;
   account: Account | null = null;
-  constructor(
-    private route: ActivatedRoute,
-    private paymentService: PaymentService,
-    private router: Router,
-    private accountService: AccountService,
-    private loginService: LoginService
-  ) {}
+  constructor(private paymentService: PaymentService, private router: Router, private accountService: AccountService) {}
   ngOnInit(): void {
     // try to log in automatically
     this.accountService.identity().subscribe(account => {

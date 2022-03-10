@@ -41,15 +41,5 @@
                 <constraints nullable="false" />
             </column>
         </createTable>
-
-            
-        <!-- <ext:loadData encoding="UTF-8"
-                  file="config/liquibase/data/payments.csv"
-                  separator=";"
-                  identityInsertEnabled="true"
-                  tableName="payment">
-                <column name="last_payment" type="timestamp"/>
-        </ext:loadData> -->
-            
     </changeSet>
 </databaseChangeLog>

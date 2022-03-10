@@ -16,11 +16,11 @@ public class DroolsConfiguration {
 
     @Bean
     public KieContainer getKieContainer() {
-        KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+        var kieFileSystem = kieServices.newKieFileSystem();
         kieFileSystem.write(ResourceFactory.newClassPathResource("drools/payment.drl"));
-        KieBuilder kb = kieServices.newKieBuilder(kieFileSystem);
+        var kb = kieServices.newKieBuilder(kieFileSystem);
         kb.buildAll();
-        KieModule kieModule = kb.getKieModule();
+        var kieModule = kb.getKieModule();
         return kieServices.newKieContainer(kieModule.getReleaseId());
     }
 }

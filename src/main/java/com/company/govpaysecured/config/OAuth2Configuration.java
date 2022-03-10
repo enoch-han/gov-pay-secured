@@ -17,10 +17,7 @@ public class OAuth2Configuration {
         ClientRegistrationRepository clientRegistrationRepository,
         OAuth2AuthorizedClientRepository authorizedClientRepository
     ) {
-        DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
-            clientRegistrationRepository,
-            authorizedClientRepository
-        );
+        var authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientRepository);
 
         authorizedClientManager.setAuthorizedClientProvider(
             OAuth2AuthorizedClientProviderBuilder

@@ -74,7 +74,13 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://DO_NOT_CALL:9080/auth/realms/jhipster
+            issuer-uri: http://DO_NOT_CALL:9080/auth/realms/govpaysecured
+  activemq:
+    broker-url: tcp://localhost:61616
+    username: admin
+    password: admin
+    packages:
+      trust-all: false
 
 server:
   port: 10344

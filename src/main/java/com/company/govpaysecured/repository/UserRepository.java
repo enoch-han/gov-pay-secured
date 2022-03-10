@@ -1,7 +1,6 @@
 package com.company.govpaysecured.repository;
 
 import com.company.govpaysecured.domain.User;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;

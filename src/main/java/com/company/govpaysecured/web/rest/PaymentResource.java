@@ -50,7 +50,7 @@ public class PaymentResource {
             throw new BadRequestAlertException("A new payment cannot already have an ID", "paymentManagement", "idexists");
         }
 
-        Message message = new Message();
+        var message = new Message();
         message.setSource("rest resource");
         message.setMessage("payment needs to validated");
         message.setPayload(payment);
@@ -67,21 +67,21 @@ public class PaymentResource {
     @GetMapping("/payments/companyName")
     public Mock getCompanyName() {
         // a mock that aquires company name
-        String uri = "https://mockbin.org/bin/c725e6ca-adbe-4a1a-900a-63fea1c4b760";
-        RestTemplate restTemplate = new RestTemplate();
+        var uri = "https://mockbin.org/bin/c725e6ca-adbe-4a1a-900a-63fea1c4b760";
+        var restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Mock.class);
     }
 
     @GetMapping("/payments/lastPayment")
     public Mock getLastPayment() {
         // a mock that aquires last Payment date
-        String uri = "https://mockbin.org/bin/5c7b0680-ce8a-41b2-b303-2f9bd9172196";
-        RestTemplate restTemplate = new RestTemplate();
+        var uri = "https://mockbin.org/bin/5c7b0680-ce8a-41b2-b303-2f9bd9172196";
+        var restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Mock.class);
     }
 
     @PostMapping("/payments/initiate")
-    public CreateHostedCheckoutResponse getInititatePayment(@Valid @RequestBody Payment payment) throws URISyntaxException {
+    public CreateHostedCheckoutResponse getInititatePayment(@Valid @RequestBody Payment payment) {
         CreateHostedCheckoutResponse response = worldLinePaymentService.initiatePayment(payment);
         log.debug(" world line initiation response : {}", response);
 
@@ -89,7 +89,7 @@ public class PaymentResource {
     }
 
     @PostMapping("/payments/getPaymentResponse")
-    public GetHostedCheckoutResponse getPaymentResponse(@Valid @RequestBody String hostedCheckoutId) throws URISyntaxException {
+    public GetHostedCheckoutResponse getPaymentResponse(@Valid @RequestBody String hostedCheckoutId) {
         return worldLinePaymentService.getPaymentResponse(hostedCheckoutId);
     }
 }

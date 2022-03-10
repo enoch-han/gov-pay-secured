@@ -13,13 +13,11 @@ import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.GetHostedChec
 import com.ingenico.connect.gateway.sdk.java.domain.hostedcheckout.definitions.HostedCheckoutSpecificInput;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.Customer;
 import com.ingenico.connect.gateway.sdk.java.domain.payment.definitions.Order;
-import java.io.IOError;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,23 +54,23 @@ public class WorldLinePaymentService {
         CreateHostedCheckoutRequest body = new CreateHostedCheckoutRequest();
         try {
             client = getClient();
-            HostedCheckoutSpecificInput hostedCheckoutSpecificInput = new HostedCheckoutSpecificInput();
+            var hostedCheckoutSpecificInput = new HostedCheckoutSpecificInput();
             hostedCheckoutSpecificInput.setLocale("en_GB");
             hostedCheckoutSpecificInput.setVariant("100");
             hostedCheckoutSpecificInput.setReturnUrl(applicationProperties.getWorldLine().getReturnURL());
 
-            AmountOfMoney amountOfMoney = new AmountOfMoney();
+            var amountOfMoney = new AmountOfMoney();
             amountOfMoney.setAmount(value.getPaymentAmount());
             amountOfMoney.setCurrencyCode("USD");
 
-            Address billingAddress = new Address();
+            var billingAddress = new Address();
             billingAddress.setCountryCode("US");
 
-            Customer customer = new Customer();
+            var customer = new Customer();
             customer.setBillingAddress(billingAddress);
             customer.setMerchantCustomerId(applicationProperties.getWorldLine().getMerchantId());
 
-            Order order = new Order();
+            var order = new Order();
             order.setAmountOfMoney(amountOfMoney);
             order.setCustomer(customer);
 

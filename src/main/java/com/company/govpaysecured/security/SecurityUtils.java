@@ -19,6 +19,8 @@ public final class SecurityUtils {
 
     public static final String CLAIMS_NAMESPACE = "https://www.jhipster.tech/";
 
+    private static final String PREFERRED_USER_NAME = "preferred_username";
+
     private SecurityUtils() {}
 
     /**
@@ -27,7 +29,7 @@ public final class SecurityUtils {
      * @return the login of the current user.
      */
     public static Optional<String> getCurrentUserLogin() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
+        var securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(extractPrincipal(securityContext.getAuthentication()));
     }
 
@@ -38,11 +40,11 @@ public final class SecurityUtils {
             UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
             return springSecurityUser.getUsername();
         } else if (authentication instanceof JwtAuthenticationToken) {
-            return (String) ((JwtAuthenticationToken) authentication).getToken().getClaims().get("preferred_username");
+            return (String) ((JwtAuthenticationToken) authentication).getToken().getClaims().get(PREFERRED_USER_NAME);
         } else if (authentication.getPrincipal() instanceof DefaultOidcUser) {
             Map<String, Object> attributes = ((DefaultOidcUser) authentication.getPrincipal()).getAttributes();
-            if (attributes.containsKey("preferred_username")) {
-                return (String) attributes.get("preferred_username");
+            if (attributes.containsKey(PREFERRED_USER_NAME)) {
+                return (String) attributes.get(PREFERRED_USER_NAME);
             }
         } else if (authentication.getPrincipal() instanceof String) {
             return (String) authentication.getPrincipal();
@@ -56,7 +58,7 @@ public final class SecurityUtils {
      * @return true if the user is authenticated, false otherwise.
      */
     public static boolean isAuthenticated() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication != null && getAuthorities(authentication).noneMatch(AuthoritiesConstants.ANONYMOUS::equals);
     }
 
@@ -67,7 +69,7 @@ public final class SecurityUtils {
      * @return true if the current user has any of the authorities, false otherwise.
      */
     public static boolean hasCurrentUserAnyOfAuthorities(String... authorities) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
         return (
             authentication != null && getAuthorities(authentication).anyMatch(authority -> Arrays.asList(authorities).contains(authority))
         );

@@ -28,7 +28,7 @@ class UserSearchRepositoryInternalImpl implements UserSearchRepositoryInternal {
 
     @Override
     public Stream<User> search(String query) {
-        NativeSearchQuery nativeSearchQuery = new NativeSearchQuery(queryStringQuery(query));
+        var nativeSearchQuery = new NativeSearchQuery(queryStringQuery(query));
         return elasticsearchTemplate.search(nativeSearchQuery, User.class).map(SearchHit::getContent).stream();
     }
 }
