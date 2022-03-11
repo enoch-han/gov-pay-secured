@@ -162,3 +162,8 @@ Desktop.ini
 # elk data
 ####################
 /src/main/docker/elasticsearch/data
+
+####################
+# jenkins data
+###################
+/src/main/docker/jenkins_home
