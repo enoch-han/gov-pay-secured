@@ -329,7 +329,7 @@ if (project.hasProperty("nodeInstall")) {
     Boolean downloadNode = !os.isMacOsX() || arch.isAmd64()
     node {
         version = "14.17.6"
-        npmVersion = "8.1.0"
+        npmVersion = "7.17.0"
         download = downloadNode
     }
 }
