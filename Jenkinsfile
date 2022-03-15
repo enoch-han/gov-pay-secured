@@ -4,22 +4,22 @@ node {
         checkout scm
     }
     stage('check java') {
-            sh "java -version"
+            pwsh "java -version"
             }
 
             stage('clean') {
-                sh "./gradlew clean --no-daemon"
+                pwsh "./gradlew clean --no-daemon"
             }
             stage('nohttp') {
-                sh "./gradlew checkstyleNohttp --no-daemon --stacktrace"
+                pwsh "./gradlew checkstyleNohttp --no-daemon --stacktrace"
             }
 
             stage('npm install') {
-                sh "./gradlew npm_install -PnodeInstall --no-daemon"
+                pwsh "./gradlew npm_install -PnodeInstall --no-daemon"
             }
             stage('backend tests') {
                 try {
-                    sh "./gradlew test integrationTest -PnodeInstall --no-daemon"
+                    pwsh "./gradlew test integrationTest -PnodeInstall --no-daemon"
                 } catch(err) {
                     throw err
                 } finally {
@@ -29,7 +29,7 @@ node {
 
             stage('frontend tests') {
                 try {
-                    sh "./gradlew npm_run_test -PnodeInstall --no-daemon"
+                    pwsh "./gradlew npm_run_test -PnodeInstall --no-daemon"
                 } catch(err) {
                     throw err
                 } finally {
@@ -38,13 +38,13 @@ node {
             }
 
             stage('packaging') {
-                sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
+                pwsh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
                 archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
             }
 
             stage('quality analysis') {
                 withSonarQubeEnv('govpaysecuredsonar') {
-                    sh "./gradlew sonarqube --no-daemon"
+                    pwsh "./gradlew sonarqube --no-daemon"
                 }
             }
     
