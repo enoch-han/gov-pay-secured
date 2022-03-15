@@ -5,7 +5,7 @@ node {
         checkout scm
     }
 
-    docker.image('jhipster/jhipster:v7.3.1').inside('-u root -e GRADLE_USER_HOME=.gradle') {
+    docker.image('jhipster/jhipster:v7.3.1').inside('-u root -e GRADLE_USER_HOME=.gradle -w /var/jenkins_home/workspace/govpaysecured') {
         withEnv([
             "NPM_CONFIG_CACHE = ${WORKSPACE}/.npm",
             "HOME = ${WORKSPACE}"
