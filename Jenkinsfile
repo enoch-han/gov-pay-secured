@@ -23,7 +23,9 @@ node {
             }
 
             stage('npm install') {
-                sh "./gradlew npm_install -PnodeInstall --no-daemon --stacktrace"
+                sh "npm cache verify"
+                sh "npm cache clean --force"
+                sh "./gradlew npm_install -PnodeInstall --no-daemon"
             }
             stage('backend tests') {
                 try {
