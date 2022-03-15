@@ -5,10 +5,10 @@ node {
         checkout scm
     }
 
-    docker.image('jhipster/jhipster:v7.3.1').inside('-u jhipster -e GRADLE_USER_HOME=.gradle') {
+    docker.image('jhipster/jhipster:v7.3.1').inside('-u root -e GRADLE_USER_HOME=.gradle') {
         withEnv([
-            'npm_config_cache=npm-cache',
-            'HOME=.'
+            "NPM_CONFIG_CACHE = ${WORKSPACE}/.npm",
+            "HOME = ${WORKSPACE}"
         ]){
             stage('check java') {
             sh "java -version"
