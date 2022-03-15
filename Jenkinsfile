@@ -6,7 +6,11 @@ node {
     }
 
     docker.image('jhipster/jhipster:v7.3.1').inside('-u jhipster -e GRADLE_USER_HOME=.gradle') {
-        stage('check java') {
+        withEnv([
+            'npm_config_cache=npm-cache',
+            'HOME=.'
+        ]){
+            stage('check java') {
             sh "java -version"
         }
 
@@ -50,6 +54,7 @@ node {
             withSonarQubeEnv('govpaysecuredsonar') {
                 sh "./gradlew sonarqube --no-daemon"
             }
+        }
         }
     }
 }
