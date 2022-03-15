@@ -8,7 +8,6 @@ node {
             }
 
             stage('clean') {
-                sh "chmod +x gradlew"
                 sh "./gradlew clean --no-daemon"
             }
             stage('nohttp') {
@@ -16,8 +15,6 @@ node {
             }
 
             stage('npm install') {
-                sh "npm cache verify"
-                sh "npm cache clean --force"
                 sh "./gradlew npm_install -PnodeInstall --no-daemon"
             }
             stage('backend tests') {
