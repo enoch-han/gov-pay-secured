@@ -15,6 +15,8 @@ node {
             }
 
             stage('npm install') {
+                bat "npm cache verify"
+                bat "npm cache clean"
                 bat "./gradlew npm_install -PnodeInstall --no-daemon"
             }
             stage('backend tests') {
