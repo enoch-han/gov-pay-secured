@@ -3,7 +3,7 @@ version: '3.8'
 services:
   govpaysecured-sonar:
     image: sonarqube:8.9.2-community
-    container_name: sonar
+    container_name: sonar2
     # command: -Dsonar.ce.javaOpts=-Xmx256m
     # Authentication is turned off for out of the box experience while trying out SonarQube
     # For real use cases delete sonar.forceAuthentication variable or set sonar.forceAuthentication=true
