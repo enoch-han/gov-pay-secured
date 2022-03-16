@@ -4,6 +4,7 @@
   "private": true,
   "description": "Description for govpaysecured",
   "license": "UNLICENSED",
+  "main": "index.js",
   "scripts": {
     "app:start": "./gradlew",
     "backend:build-cache": "npm run backend:info && npm run backend:nohttp:test && npm run ci:e2e:package",
