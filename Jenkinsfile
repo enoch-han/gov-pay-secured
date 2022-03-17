@@ -44,7 +44,7 @@ node {
     }
 
     stage('quality analysis') {
-        bat "./gradlew sonarqube --no-daemon"
+        bat "./gradlew -Pprod clean check jacocoTestReport sonarqube -Dsonar.host.url=http://localhost:9001"
     }
     
 }
