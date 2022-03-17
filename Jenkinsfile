@@ -38,13 +38,13 @@ node {
         }
     }
 
+    stage('quality analysis') {
+        bat "./gradlew -Pprod clean check jacocoTestReport sonarqube -Dsonar.host.url=http://localhost:9001"
+    }
+    
     stage('packaging') {
         bat "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
         archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
     }
 
-    stage('quality analysis') {
-        bat "./gradlew -Pprod clean check jacocoTestReport sonarqube -Dsonar.host.url=http://localhost:9001"
-    }
-    
 }
